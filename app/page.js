@@ -4,7 +4,6 @@ import { Box, Button, Stack, TextField } from '@mui/material'
 import { useState, useRef, useEffect } from 'react'
 
 export default function Home() {
-  //
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
@@ -15,7 +14,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
 
   const sendMessage = async () => {
-    if (!message.trim() || isLoading) return;  // Don't send empty messages
+    if (!message.trim() || isLoading) return;
     setIsLoading(true)
     setMessage('')
     setMessages((messages) => [

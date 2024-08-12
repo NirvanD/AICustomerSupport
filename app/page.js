@@ -134,7 +134,9 @@ export default function Home() {
             width="100%"
           >
             <TextField
-             
+              inputProps={{
+                style: {color: "white"}
+              }}
               fullWidth
               value={message}
               onChange={(e) => setMessage(e.target.value)}

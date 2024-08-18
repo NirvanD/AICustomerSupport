@@ -125,7 +125,7 @@ function TravelBot() {
           p={3}
           flexGrow={1}
           overflow="auto"
-          sx={{ bgcolor: '#f5f5f5' }}
+          sx={{ bgcolor: '#00274C' }}
         >
           {messages.map((message, index) => (
             <Box
@@ -161,7 +161,7 @@ function TravelBot() {
         <Stack direction="row" spacing={2} p={2} bgcolor="#e3f2fd">
           <TextField
             inputProps={{
-              style: { color: "#1565c0" }
+              style: { color: "#000000" }
             }}
             fullWidth
             value={message}

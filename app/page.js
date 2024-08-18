@@ -7,7 +7,7 @@ export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hi! I'm the Headstarter support assistant, specializing in travel assistance! How can I help you today? You can say Booking Assistance, Concierge Services, Customer Services!, or any other travel related questions you may have!",
+      content: "Hi! I'm the GlobeGuide, a travel support assistant, specializing in travel assistance! How can I help you today? You can say Booking Assistance, Concierge Services, Customer Services!, or any other travel related questions you may have!",
     },
   ])
   const [message, setMessage] = useState('')

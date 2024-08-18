@@ -1,13 +1,15 @@
 'use client'
 
-import { Box, Button, Stack, TextField } from '@mui/material'
+import { Box, Button, Stack, TextField, Typography } from '@mui/material'
 import { useState, useRef, useEffect } from 'react'
+import ChatIcon from '@mui/icons-material/Chat'
+import { TravelExplore } from '@mui/icons-material'
 
-export default function Home() {
+function TravelBot() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hi! I'm the GlobeGuide, a travel support assistant, specializing in travel assistance! How can I help you today? You can say Booking Assistance, Concierge Services, Customer Services!, or any other travel related questions you may have!",
+      content: "Hi! I'm the GlobeGuide, a travel support assistant, specializing in travel assistance! How can I help you today? You can say Booking Assistance, Concierge Services, Customer Services!, or any other travel-related questions you may have!",
     },
   ])
   const [message, setMessage] = useState('')
@@ -17,6 +19,7 @@ export default function Home() {
     if (!message.trim() || isLoading) return;
     setIsLoading(true)
     setMessage('')
+
     setMessages((messages) => [
       ...messages,
       { role: 'user', content: message },
@@ -88,21 +91,41 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      bgcolor="#e3f2fd"
     >
-      <Stack
-        direction={'column'}
-        width="500px"
-        height="700px"
-        border="1px solid black"
-        p={2}
-        spacing={3}
+      <Box
+        width="700px"
+        height="85vh"
+        borderRadius={16}
+        overflow="hidden"
+        boxShadow="0px 8px 30px rgba(0, 0, 0, 0.15)"
+        display="flex"
+        flexDirection="column"
+        bgcolor="white"
       >
+        {/* Header */}
+        <Box
+          bgcolor="#1565c0"
+          color="white"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          p={2}
+        >
+          <TravelExplore fontSize="large" />
+          <Typography variant="h5" ml={2}>
+            GlobeGuide
+          </Typography>
+        </Box>
+
+        {/* Chat Area */}
         <Stack
-          direction={'column'}
+          direction="column"
           spacing={2}
+          p={3}
           flexGrow={1}
           overflow="auto"
-          maxHeight="100%"
+          sx={{ bgcolor: '#f5f5f5' }}
         >
           {messages.map((message, index) => (
             <Box
@@ -115,12 +138,17 @@ export default function Home() {
               <Box
                 bgcolor={
                   message.role === 'assistant'
-                    ? 'primary.main'
-                    : 'secondary.main'
+                    ? '#bbdefb'
+                    : '#64b5f6'
                 }
-                color="white"
-                borderRadius={16}
-                p={3}
+                color="black"
+                borderRadius={12}
+                p={2}
+                maxWidth="80%"
+                sx={{
+                  borderBottomLeftRadius: message.role === 'assistant' ? 0 : 12,
+                  borderBottomRightRadius: message.role === 'user' ? 0 : 12,
+                }}
               >
                 {message.content}
               </Box>
@@ -128,32 +156,38 @@ export default function Home() {
           ))}
           <div ref={messagesEndRef} />
         </Stack>
-        <Stack direction={'row'} spacing={2}>
-          <Box
-            width="100%"
-            border="0.5px solid white"
-          >
-            <TextField
-              inputProps={{
-                style: { color: "white" }
-              }}
-              fullWidth
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              disabled={isLoading}
-            />
-          </Box>
 
+        {/* Input Area */}
+        <Stack direction="row" spacing={2} p={2} bgcolor="#e3f2fd">
+          <TextField
+            inputProps={{
+              style: { color: "#1565c0" }
+            }}
+            fullWidth
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            disabled={isLoading}
+            variant="outlined"
+            placeholder="Type your travel queries here..."
+          />
           <Button
             variant="contained"
             onClick={sendMessage}
             disabled={isLoading}
+            sx={{
+              backgroundColor: '#1565c0',
+              '&:hover': {
+                backgroundColor: '#0d47a1',
+              }
+            }}
           >
             {isLoading ? 'Sending...' : 'Send'}
           </Button>
         </Stack>
-      </Stack>
+      </Box>
     </Box>
-  )
+  );
 }
+
+export default TravelBot;
